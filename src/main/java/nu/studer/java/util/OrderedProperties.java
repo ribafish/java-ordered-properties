@@ -104,6 +104,7 @@ public final class OrderedProperties implements Serializable {
      * @return the previous value of the property, or <tt>null</tt> if there was no property with the specified key
      */
     public String removeProperty(String key) {
+        System.out.println("OrderedProperties.removeProperty");
         return properties.remove(key);
     }
 
