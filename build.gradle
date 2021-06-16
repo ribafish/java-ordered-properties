@@ -1,6 +1,5 @@
 plugins {
     id 'nu.studer.credentials' version '2.1'
-    id 'com.jfrog.bintray' version '1.8.5'
     id 'org.nosphere.gradle.github.actions' version '1.2.0'
     id 'maven-publish'
     id 'groovy'
@@ -10,15 +9,13 @@ group = 'nu.studer'
 version = '1.0.5-DEV'
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    compileOnly 'org.codehaus.groovy:groovy:2.5.14'  // workaround for configuration cache
+    compileOnly 'org.codehaus.groovy:groovy:3.0.8'  // workaround for configuration cache
 
-    testImplementation('org.spockframework:spock-core:2.0-M4-groovy-3.0') {
-        exclude module: 'groovy-all'
-    }
+    testImplementation('org.spockframework:spock-core:2.0-groovy-3.0')
 }
 
 java {
@@ -77,32 +74,6 @@ publishing {
                     url = 'https://github.com/etiennestuder/java-ordered-properties.git'
                 }
             }
-        }
-    }
-}
-
-bintray {
-    user = credentials.BINTRAY_USER
-    key = credentials.BINTRAY_API_KEY
-
-    publications = ['java']
-
-    publish = true
-    dryRun = false
-
-    pkg {
-        repo = 'java-utilities'
-        name = 'java-ordered-properties'
-        desc = 'Alternative to the JDK class java.util.Properties.'
-        websiteUrl = 'https://github.com/etiennestuder/java-ordered-properties'
-        issueTrackerUrl = 'https://github.com/etiennestuder/java-ordered-properties/issues'
-        vcsUrl = 'https://github.com/etiennestuder/java-ordered-properties.git'
-        licenses = ['Apache-2.0']
-        labels = ['java', 'utilities']
-        publicDownloadNumbers = false
-
-        version {
-            vcsTag = publishing.publications.java.version
         }
     }
 }
