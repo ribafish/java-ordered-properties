@@ -26,4 +26,15 @@ buildCache {
     local {
         enabled = true
     }
+
+    remote(HttpBuildCache.class) {
+        url = 'https://cache-node-hetzner.grdev.net/cache/'
+        allowUntrustedServer = false
+        credentials { creds ->
+            creds.username = System.getenv('GRADLE_ENTERPRISE_CACHE_USERNAME')
+            creds.password = System.getenv('GRADLE_ENTERPRISE_CACHE_PASSWORD')
+        }
+        enabled = true
+        push = System.getenv('TEAMCITY_VERSION') != null
+    }
 }
