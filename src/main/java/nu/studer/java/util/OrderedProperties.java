@@ -114,6 +114,7 @@ public final class OrderedProperties implements Serializable {
      * @param key the key whose presence is to be tested
      */
     public boolean containsProperty(String key) {
+        System.out.println("OrderedProperties.containsProperty");
         return properties.containsKey(key);
     }
 
