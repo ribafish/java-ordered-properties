@@ -19,7 +19,7 @@ gradleEnterprise {
         }
 
         value 'ENV_TEST', System.getenv('ENV_TEST')
-        value 'SYS_TEST', System.property('gradle.cache.local.enabled') as String
+        value 'SYS_TEST', System.getProperty('gradle.cache.local.enabled') as String
     }
 }
 
