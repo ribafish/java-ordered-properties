@@ -17,6 +17,8 @@ gradleEnterprise {
         obfuscation {
             ipAddresses { addresses -> addresses.collect { address -> '0.0.0.0' } }
         }
+
+        value 'ENV_TEST', System.getenv('ENV_TEST')
     }
 }
 
