@@ -18,7 +18,7 @@ gradleEnterprise {
             ipAddresses { addresses -> addresses.collect { address -> '0.0.0.0' } }
         }
 
-        value 'ENV_TEST', System.getenv('ENV_TEST')
+        value 'ENV_TEST', System.getenv('GRADLE_CACHE_LOCAL_ENABLED')
         value 'SYS_TEST', System.getProperty('gradle.cache.local.enabled') as String
     }
 }
