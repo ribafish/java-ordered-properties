@@ -28,7 +28,7 @@ rootProject.name = 'java-ordered-properties'
 
 buildCache {
     local {
-        enabled = true
+        enabled = false
     }
 
     remote(HttpBuildCache.class) {
