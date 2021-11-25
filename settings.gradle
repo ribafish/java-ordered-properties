@@ -14,6 +14,7 @@ gradleEnterprise {
         }
         publishAlways()
         captureTaskInputFiles = true
+        uploadInBackground = false
         obfuscation {
             ipAddresses { addresses -> addresses.collect { address -> '0.0.0.0' } }
         }
