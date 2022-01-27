@@ -4,7 +4,7 @@ plugins {
 }
 
 gradleEnterprise {
-    server = "https://e.grdev.net"
+    server = "https://ge.solutions-team.gradle.com"
 
     buildScan {
         def acceptTOSProp = 'java-ordered-properties.acceptGradleTOS'
