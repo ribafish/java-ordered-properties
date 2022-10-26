@@ -32,7 +32,7 @@ buildCache {
     }
 
     remote(HttpBuildCache.class) {
-        url = 'https://cache-node-hetzner.grdev.net/cache/'
+        url = 'https://ge.solutions-team.gradle.com/cache/'
         allowUntrustedServer = false
         credentials { creds ->
             creds.username = System.getenv('GRADLE_ENTERPRISE_CACHE_USERNAME')
