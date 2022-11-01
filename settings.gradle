@@ -1,44 +1,33 @@
 plugins {
-    id 'com.gradle.enterprise' version '3.11.2'
+    id 'com.gradle.enterprise' version '3.11.3'
     id 'com.gradle.common-custom-user-data-gradle-plugin' version '1.8.2'
 }
 
+def isCI = System.getenv('CI') != null
+
 gradleEnterprise {
-    server = "https://ge.solutions-team.gradle.com"
+    server = 'https://etiennestuder.gradle-enterprise.cloud'
+    allowUntrustedServer = false
 
     buildScan {
-        def acceptTOSProp = 'java-ordered-properties.acceptGradleTOS'
-        if (settings.hasProperty(acceptTOSProp) && Boolean.valueOf(settings.getProperty(acceptTOSProp))) {
-            termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-            termsOfServiceAgree = 'yes'
-        }
         publishAlways()
-        captureTaskInputFiles = true
-        uploadInBackground = false
+        uploadInBackground = !isCI
+        capture { taskInputFiles = true }
         obfuscation {
             ipAddresses { addresses -> addresses.collect { address -> '0.0.0.0' } }
         }
+    }
+}
 
-        value 'ENV_TEST', System.getenv('GRADLE_CACHE_LOCAL_ENABLED')
-        value 'SYS_TEST', System.getProperty('gradle.cache.local.enabled') as String
+buildCache {
+    local {
+        enabled = true
+    }
+
+    remote(gradleEnterprise.buildCache) {
+        enabled = true
+        push = isCI
     }
 }
 
 rootProject.name = 'java-ordered-properties'
-
-buildCache {
-    local {
-        enabled = false
-    }
-
-    remote(HttpBuildCache.class) {
-        url = 'https://ge.solutions-team.gradle.com/cache/'
-        allowUntrustedServer = false
-        credentials { creds ->
-            creds.username = System.getenv('GRADLE_ENTERPRISE_CACHE_USERNAME')
-            creds.password = System.getenv('GRADLE_ENTERPRISE_CACHE_PASSWORD')
-        }
-        enabled = true
-        push = System.getenv('TEAMCITY_VERSION') != null
-    }
-}
