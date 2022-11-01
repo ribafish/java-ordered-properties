@@ -4,9 +4,11 @@ on: [push, workflow_dispatch]
 jobs:
   build:
      runs-on: ubuntu-latest
+     env:
+       GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_ACCESS_TOKEN }}
      strategy:
         matrix:
-          java: [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+          java: [ 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
      name: Building on Java ${{ matrix.java }}
      steps:
        - name: Check out project
@@ -16,9 +18,6 @@ jobs:
          with:
            java-version: ${{ matrix.java }}
        - name: Build with Gradle
-         uses: eskatos/gradle-command-action@v1
+         uses: gradle/gradle-build-action@v2
          with:
-           arguments: build -Pjava-ordered-properties.acceptGradleTOS=true
-           wrapper-cache-enabled: true
-           dependencies-cache-enabled: true
-           configuration-cache-enabled: false
+           arguments: build
