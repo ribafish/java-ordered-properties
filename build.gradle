@@ -96,3 +96,9 @@ publishing {
         }
     }
 }
+
+normalization {
+    runtimeClasspath {
+        ignore 'BUILD_ID.txt'
+    }
+}
