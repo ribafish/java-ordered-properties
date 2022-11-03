@@ -22,8 +22,8 @@ java {
 }
 
 task writeBuildIdFile() {
-   def buildIdFileDir = "$buildDir/resources/test"
-   def buildIdFileName = "BUILD.txt"
+   def buildIdFileDir = "$buildDir"
+   def buildIdFileName = "BUILD_ID.txt"
    outputs.file("$buildIdFileDir/$buildIdFileName")
    doLast {
       file("$buildIdFileDir").mkdirs()
