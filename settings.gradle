@@ -7,10 +7,10 @@ def isCI = System.getenv('CI') != null
 
 gradleEnterprise {
     server = 'https://etiennestuder.gradle-enterprise.cloud'
-    allowUntrustedServer = false
 
     buildScan {
         publishAlways()
+        publishIfAuthenticated()
         uploadInBackground = !isCI
         capture { taskInputFiles = true }
         obfuscation {
