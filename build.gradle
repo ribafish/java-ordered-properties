@@ -21,19 +21,6 @@ java {
     }
 }
 
-task writeBuildIdFile() {
-   def buildIdFileDir = "$buildDir/resources/test"
-   def buildIdFileName = "BUILD.txt"
-   outputs.file("$buildIdFileDir/$buildIdFileName")
-   doLast {
-      file("$buildIdFileDir").mkdirs()
-      def now = new Date()
-      file("$buildIdFileDir/$buildIdFileName").withWriter { w ->
-        w  << "${project.name}\n${now}\n"
-      }
-   }
-}
-
 tasks.withType(AbstractCompile).configureEach {
     options.compilerArgs <<
         "-Werror" <<
@@ -42,7 +29,6 @@ tasks.withType(AbstractCompile).configureEach {
 }
 
 test {
-    classpath += tasks.getByName("writeBuildIdFile").outputs.files
     useJUnitPlatform()
 }
 
