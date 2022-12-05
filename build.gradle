@@ -62,6 +62,10 @@ task docsJar(type: Jar) {
     from javadoc
 }
 
+tasks.withType(Test) {
+    inputs.property('date', new Date())
+}
+
 publishing {
     publications {
         java(MavenPublication) {
