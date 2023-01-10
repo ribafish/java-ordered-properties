@@ -567,6 +567,7 @@ b=\\u00E4\\u00F6\\u00FC \\u00E0\\u00F1
 
     def "copy constructor when custom ordering is applied"() {
         setup:
+        sleep(10000)
         def props = new OrderedPropertiesBuilder().withOrdering(String.CASE_INSENSITIVE_ORDER).build()
         props.setProperty("bbb", "222")
         props.setProperty("ccc", "333")
